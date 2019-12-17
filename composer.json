@@ -1,0 +1,24 @@
+{
+    "name": "javespi/test-doubles",
+    "description": "Test doubles",
+    "type": "project",
+    "require": {
+        "php": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sah\\TestDoubles\\": "src/",
+            "tests\\Sah\\TestDoubles\\": "tests/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Javier Espinosa",
+            "email": "javespalf@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
