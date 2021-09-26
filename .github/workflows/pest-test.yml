@@ -13,17 +13,17 @@ jobs:
       - name: Validate composer.json and composer.lock
         uses: php-actions/composer@v6
         with:
-          php_version: 7.4
+          php_version: 8.0
           command: validate
 
       - name: Install dependencies
         uses: php-actions/composer@v6
         with:
-          php_version: 7.4
+          php_version: 8.0
           args: --prefer-dist --no-progress --no-suggest
 
       - name: Run unit tests with Pest
         uses: php-actions/composer@v6
         with:
-          php_version: 7.4
+          php_version: 8.0
           command: pest
