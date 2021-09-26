@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace tests\TestDoubles\Application\Service\BookingRequest;
+namespace tests\TestDoubles\PhpUnit\Application\Service\BookingRequest;
 
 use PHPUnit\Framework\TestCase;
 use TestDoubles\Application\Service\BookingRequest\TenantBookingRequestCannotBeCreatedException;
