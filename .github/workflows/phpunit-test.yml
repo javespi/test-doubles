@@ -1,0 +1,29 @@
+name: Run PHPUnit Tests
+
+on: [push]
+
+jobs:
+  phpunit-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate composer.json and composer.lock
+        uses: php-actions/composer@v6
+        with:
+          php_version: 7.4
+          command: validate
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: 7.4
+          args: --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHP Unit test
+        uses: php-actions/composer@v6
+        with:
+          php_version: 7.4
+          command: test
