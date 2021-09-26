@@ -1,9 +1,9 @@
-name: Run unit tests with PHPUnit
+name: Run unit tests with Pest
 
 on: [push]
 
 jobs:
-  phpunit-tests:
+  pest-tests:
 
     runs-on: ubuntu-latest
 
@@ -22,8 +22,8 @@ jobs:
           php_version: 7.4
           args: --prefer-dist --no-progress --no-suggest
 
-      - name: Run unit tests with PHPUnit
+      - name: Run unit tests with Pest
         uses: php-actions/composer@v6
         with:
           php_version: 7.4
-          command: phpunit
+          command: pest
