@@ -25,10 +25,10 @@
     },
     "scripts": {
         "phpunit": [
-            "vendor/bin/phpunit tests/"
+            "vendor/bin/phpunit tests/PhpUnit/"
         ],
         "pest": [
-            "vendor/bin/pest tests/"
+            "vendor/bin/pest tests/Pest/"
         ]
     }
 }
