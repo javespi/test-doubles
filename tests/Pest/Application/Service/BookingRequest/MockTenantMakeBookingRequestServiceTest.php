@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests\TestDoubles\Pest\Application\Service\BookingRequest;
 
+use Mockery;
 use TestDoubles\Application\Service\BookingRequest\TenantBookingRequestCannotBeCreatedException;
 use TestDoubles\Application\Service\BookingRequest\TenantMakeBookingRequestRequest;
 use TestDoubles\Application\Service\BookingRequest\TenantMakeBookingRequestService;
@@ -15,8 +16,8 @@ use TestDoubles\Domain\Tenant\Tenant;
 use TestDoubles\Domain\Tenant\TenantRepository;
 
 beforeEach(function (): void {
-    $this->tenantRepository = mock(TenantRepository::class);
-    $this->paymentProvider = mock(PaymentProvider::class);
+    $this->tenantRepository = Mockery::mock(TenantRepository::class);
+    $this->paymentProvider = Mockery::mock(PaymentProvider::class);
 
     $this->tenantMakeBookingRequestService = new TenantMakeBookingRequestService(
         $this->tenantRepository,
@@ -29,22 +30,14 @@ test('tenant make a booking request with mock', function (): void {
     $price = 100;
 
     $this->tenantRepository
-       ->expects(
-           $this->once()
-       )
-       ->method('findById')
-       ->with($tenantId)
+       ->expects()->findById($tenantId)->once()
        ->andReturn(
            new Tenant()
        );
 
     $this->paymentProvider
-       ->expects(
-           $this->once()
-       )
-       ->method('authorize')
-       ->with($price)
-       ->willReturn(
+       ->expects()->authorize($price)->once()
+       ->andReturn(
            new PaymentMethod()
        );
 
@@ -61,22 +54,15 @@ test('tenant cannot make a booking request with mock', function (): void {
     $price = 100;
 
     $this->tenantRepository
-        ->expects(
-            $this->once()
-        )
-        ->method('findById')
-        ->with($tenantId)
-        ->willReturn(
+        ->expects()
+        ->findById($tenantId)->once()
+        ->andReturn(
             new Tenant()
         );
 
     $this->paymentProvider
-        ->expects(
-            $this->once()
-        )
-        ->method('authorize')
-        ->with($price)
-        ->willThrowException(
+        ->expects()->authorize($price)->once()
+        ->andThrow(
             new PaymentMethodCannotBeAuthorizedException()
         );
 
