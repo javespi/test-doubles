@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace tests\TestDoubles\Pest\Application\Service\BookingRequest;
 
-use Mockery;
 use TestDoubles\Application\Service\BookingRequest\TenantBookingRequestCannotBeCreatedException;
 use TestDoubles\Application\Service\BookingRequest\TenantMakeBookingRequestRequest;
 use TestDoubles\Application\Service\BookingRequest\TenantMakeBookingRequestService;
@@ -16,12 +15,12 @@ use TestDoubles\Domain\Tenant\Tenant;
 use TestDoubles\Domain\Tenant\TenantRepository;
 
 beforeEach(function (): void {
-    $this->tenantRepository = Mockery::mock(TenantRepository::class);
-    $this->paymentProvider = Mockery::mock(PaymentProvider::class);
+    $this->tenantRepository = mock(TenantRepository::class);
+    $this->paymentProvider = mock(PaymentProvider::class);
 
     $this->tenantMakeBookingRequestService = new TenantMakeBookingRequestService(
-        $this->tenantRepository,
-        $this->paymentProvider
+        $this->tenantRepository->expect(),
+        $this->paymentProvider->expect()
     );
 });
 
@@ -30,16 +29,20 @@ test('tenant make a booking request with mock', function (): void {
     $price = 100;
 
     $this->tenantRepository
-       ->expects()->findById($tenantId)->once()
-       ->andReturn(
-           new Tenant()
-       );
+        ->expects()
+        ->findById($tenantId)
+        ->once()
+        ->andReturn(
+            new Tenant()
+        );
 
     $this->paymentProvider
-       ->expects()->authorize($price)->once()
-       ->andReturn(
-           new PaymentMethod()
-       );
+        ->expects()
+        ->authorize($price)
+        ->once()
+        ->andReturn(
+            new PaymentMethod()
+        );
 
     assertInstanceOf(
        BookingRequest::class,
@@ -55,13 +58,16 @@ test('tenant cannot make a booking request with mock', function (): void {
 
     $this->tenantRepository
         ->expects()
-        ->findById($tenantId)->once()
+        ->findById($tenantId)
+        ->once()
         ->andReturn(
             new Tenant()
         );
 
     $this->paymentProvider
-        ->expects()->authorize($price)->once()
+        ->expects()
+        ->authorize($price)
+        ->once()
         ->andThrow(
             new PaymentMethodCannotBeAuthorizedException()
         );
