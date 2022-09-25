@@ -32,5 +32,10 @@
         "pest": [
             "vendor/bin/pest tests/Pest/"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }

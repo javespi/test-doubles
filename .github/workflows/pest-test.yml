@@ -20,7 +20,7 @@ jobs:
         uses: php-actions/composer@v6
         with:
           php_version: 8.0
-          args: --prefer-dist --no-progress --no-suggest
+          args: --prefer-dist --no-progress --no-suggest --no-plugins
 
       - name: Run unit tests with Pest
         uses: php-actions/composer@v6
