@@ -33,7 +33,9 @@
             "vendor/bin/pest tests/Pest/"
         ]
     },
-    "allow-plugins": {
-        "pestphp/pest-plugin": true
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
